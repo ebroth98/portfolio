@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config.js';
+
+const { contact: C } = SITE;
+---
+
+<BaseLayout title={"Contact — " + SITE.name} description={C.subhead}>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow fade-up">{C.eyebrow}</p>
+      <h1 class="fade-up delay-1">{C.heading}</h1>
+      <div class="rule fade-up delay-2"></div>
+      <p class="page-sub fade-up delay-2">{C.subhead}</p>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container contact-grid">
+
+      <div class="contact-info">
+        <div class="info-block">
+          <h3 class="info-heading">{C.direct_heading}</h3>
+          <a href={"mailto:" + SITE.email} class="email-link">{SITE.email}</a>
+          <p class="response-note">{C.response_label} {SITE.responseTime}</p>
+          {SITE.available
+            ? <p class="avail avail-yes">● {C.available_yes}</p>
+            : <p class="avail avail-no">● {C.available_no}</p>
+          }
+        </div>
+
+        <div class="info-block">
+          <h3 class="info-heading">{C.social_heading}</h3>
+          <div class="social-links">
+            {SITE.linkedin && (
+              <a href={SITE.linkedin} target="_blank" rel="noopener" class="social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+            )}
+            {SITE.bluesky && (
+              <a href={SITE.bluesky} target="_blank" rel="noopener" class="social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+                Bluesky
+              </a>
+            )}
+            {SITE.instagram && (
+              <a href={SITE.instagram} target="_blank" rel="noopener" class="social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                Instagram
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="sr-only"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Your Name *</label>
+              <input type="text" id="fname" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="femail">Email *</label>
+              <input type="email" id="femail" name="email" placeholder="jane@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fcompany">Company / Brand</label>
+            <input type="text" id="fcompany" name="company" placeholder="Optional" />
+          </div>
+
+          <div class="form-group">
+            <label for="ftype">Type of Project *</label>
+            <select id="ftype" name="project-type" required>
+              <option value="" disabled selected>Select a category…</option>
+              {C.project_types.map((t) => (
+                <option>{t}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fmessage">About Your Project *</label>
+            <textarea id="fmessage" name="message" rows="5" placeholder="What are you working on? What does success look like?" required></textarea>
+          </div>
+
+          <div class="form-footer">
+            <p class="form-note">{C.form_note}</p>
+            <button type="submit" class="btn btn-primary">{C.submit_label}</button>
+          </div>
+
+          <div id="formSuccess" hidden class="form-success">
+            <p>{C.success_msg}</p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(4rem, 8vw, 7rem); }
+  .page-sub { font-size: 1rem; color: var(--silver); max-width: 50ch; margin-top: -0.25rem; }
+  .contact-section { background: var(--deep); padding-block: clamp(4rem, 8vw, 7rem); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  .info-block { margin-bottom: 2.5rem; }
+  .info-heading { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 1rem; }
+  .email-link { display: block; font-size: 1.05rem; color: var(--ice); margin-bottom: 0.5rem; transition: color 0.2s; }
+  .email-link:hover { color: var(--frost); }
+  .response-note { font-size: 0.82rem; color: var(--silver); margin-bottom: 0.4rem; max-width: none; }
+  .avail { font-size: 0.78rem; font-weight: 500; max-width: none; }
+  .avail-yes { color: var(--frost); }
+  .avail-no  { color: var(--dim); }
+  .social-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .social-link { display: flex; align-items: center; gap: 0.65rem; font-size: 0.88rem; font-weight: 500; color: var(--silver); transition: color 0.2s; }
+  .social-link:hover { color: var(--ice); }
+  .form-wrap { border: 1px solid var(--ghost); background: rgba(13,15,23,0.5); padding: clamp(1.75rem, 4vw, 2.75rem); }
+  form { display: flex; flex-direction: column; gap: 1.35rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+  label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--silver); }
+  input, select, textarea { font-family: var(--font-body); font-size: 0.92rem; font-weight: 300; color: var(--white); background: var(--void); border: 1px solid var(--ghost); padding: 0.75rem 1rem; outline: none; transition: border-color 0.2s; appearance: none; border-radius: 0; width: 100%; }
+  input::placeholder, textarea::placeholder { color: var(--dim); }
+  input:focus, select:focus, textarea:focus { border-color: var(--arctic); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23404D63' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; color: var(--silver); }
+  select option { background: var(--obsidian); color: var(--white); }
+  textarea { resize: vertical; min-height: 130px; }
+  .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .form-note { font-size: 0.68rem; color: var(--dim); max-width: none; }
+  .form-success { padding: 1rem; border: 1px solid var(--glacier); background: rgba(26,68,89,0.15); }
+  .form-success p { font-size: 0.88rem; color: var(--ice); max-width: none; margin: 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  var form = document.getElementById('contactForm');
+  var success = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        e.preventDefault();
+        form.querySelectorAll('input,select,textarea,button').forEach(function(el) { el.disabled = true; });
+        if (success) success.hidden = false;
+      }
+    });
+  }
+</script>

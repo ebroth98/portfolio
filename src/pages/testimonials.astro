@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config.js';
+
+const { testimonials: T } = SITE;
+
+// ── ADD YOUR TESTIMONIALS HERE ─────────────────────────────
+// Copy and paste the block below to add more reviews.
+const reviews = [
+  {
+    quote:    "Working with [Your Name] was one of the easiest creative collaborations I've had. They took our messy brief and turned it into copy that actually sounded like us — not like a template.",
+    name:     "Client Name",
+    title:    "Founder, Company Name",
+    category: "Brand & Marketing",
+  },
+  {
+    quote:    "The white paper they wrote for us got more downloads in its first week than anything we'd published before. Dense technical content made genuinely readable.",
+    name:     "Client Name",
+    title:    "Head of Marketing, Company Name",
+    category: "Technical Writing",
+  },
+  {
+    quote:    "I needed someone who could write with warmth and precision at the same time. That's a rare combination and [Your Name] delivered it effortlessly.",
+    name:     "Client Name",
+    title:    "Brand Director, Company Name",
+    category: "Creative Copy",
+  },
+];
+---
+
+<BaseLayout title={"Testimonials — " + SITE.name} description={T.subhead}>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow fade-up">{T.eyebrow}</p>
+      <h1 class="fade-up delay-1">{T.heading}</h1>
+      <div class="rule fade-up delay-2"></div>
+      <p class="page-sub fade-up delay-2">{T.subhead}</p>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="testimonials-grid">
+        {reviews.map((r) => (
+          <blockquote class="testimonial-card">
+            <span class="quote-mark" aria-hidden="true">"</span>
+            <p class="quote-text">{r.quote}</p>
+            <footer class="quote-footer">
+              <div class="quote-attr">
+                <span class="quote-name">{r.name}</span>
+                <span class="quote-title">{r.title}</span>
+              </div>
+              <span class="quote-cat tag">{r.category}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+
+      <div class="cta-band">
+        <p>
+          {T.cta_text}{' '}
+          <a href="/contact" class="band-link">{T.cta_link}</a>{' '}
+          {T.cta_note}
+        </p>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(4rem, 8vw, 7rem); }
+  .page-sub { font-size: 1rem; color: var(--silver); max-width: 50ch; margin-top: -0.25rem; }
+  .testimonials-section { background: var(--deep); padding-block: clamp(4rem, 8vw, 7rem); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+  .testimonial-card { background: var(--obsidian); border: 1px solid var(--ghost); padding: 2.25rem; display: flex; flex-direction: column; gap: 1.5rem; transition: border-color 0.25s; }
+  .testimonial-card:hover { border-color: var(--dim); }
+  .quote-mark { font-family: var(--font-heading); font-size: 4rem; line-height: 0.8; color: var(--arctic); opacity: 0.4; display: block; margin-bottom: -0.5rem; }
+  .quote-text { font-family: var(--font-heading); font-style: italic; font-size: clamp(1rem, 1.4vw, 1.15rem); font-weight: 300; color: var(--white); line-height: 1.7; max-width: none; }
+  .quote-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--ghost); }
+  .quote-attr { display: flex; flex-direction: column; gap: 0.15rem; }
+  .quote-name { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+  .quote-title { font-size: 0.72rem; color: var(--silver); }
+  .cta-band { text-align: center; padding: 2rem; border: 1px solid var(--ghost); background: var(--obsidian); }
+  .cta-band p { font-size: 0.95rem; color: var(--silver); max-width: none; margin: 0; }
+  .band-link { color: var(--frost); font-weight: 500; transition: color 0.2s; }
+  .band-link:hover { color: var(--ice); }
+</style>
