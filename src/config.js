@@ -40,8 +40,8 @@ export const SITE = {
 
   // ── Stats (shown on home and about pages) ─────────────────
   stats: [
-    { num: '10+',  label: 'Years Creating'  },
-    { num: '20+', label: 'Clients Served' },
+    { num: '6+',  label: 'Years Creating'  },
+    { num: '10+', label: 'Clients Served' },
   ],
 
   // ── Work page ─────────────────────────────────────────────
