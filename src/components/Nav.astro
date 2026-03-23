@@ -8,6 +8,10 @@ const navLinks = [
 ];
 
 const currentPath = Astro.url.pathname;
+
+function linkClass(href) {
+  return currentPath === href ? 'nav-link active' : 'nav-link';
+}
 ---
 
 <header class="site-header" id="siteHeader">
@@ -23,12 +27,7 @@ const currentPath = Astro.url.pathname;
 
     <nav class="nav-links" aria-label="Main navigation">
       {navLinks.map(link => (
-        
-          href={link.href}
-          class={currentPath === link.href ? 'nav-link active' : 'nav-link'}
-        >
-          {link.label}
-        </a>
+        <a href={link.href} class={linkClass(link.href)}>{link.label}</a>
       ))}
       <a href="/contact" class="btn btn-primary nav-cta">Hire Me</a>
     </nav>
@@ -64,7 +63,6 @@ const currentPath = Astro.url.pathname;
     gap: 1rem;
   }
 
-  /* Logo — left aligned */
   .logo { display: flex; align-items: center; gap: 0.85rem; }
   .logo-img {
     width: 48px; height: 48px;
@@ -78,7 +76,6 @@ const currentPath = Astro.url.pathname;
   .logo-name { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; }
   .logo-sub  { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--frost); }
 
-  /* Nav — centered */
   .nav-links {
     display: flex;
     align-items: center;
