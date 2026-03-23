@@ -20,7 +20,6 @@ const { about, stats } = SITE;
 
       <div class="about-visual">
         <div class="portrait-wrap">
-          <!-- Replace with: <img src="/headshot.jpg" alt={SITE.name} class="portrait" /> -->
           <img src="/headshot.jpg" alt={SITE.name} class="portrait" />
           <div class="portrait-offset"></div>
         </div>
@@ -62,10 +61,11 @@ const { about, stats } = SITE;
 </BaseLayout>
 
 <style>
-  .page-hero { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(4rem, 8vw, 7rem); }
-  .about-section { background: var(--deep); padding-block: clamp(4rem, 8vw, 7rem); }
+  .page-hero { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(1.25rem, 2vw, 1.75rem); text-align: center; }
+  .page-hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
+  .about-section { background: var(--deep); padding-block: clamp(2rem, 4vw, 3rem); }
   .about-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(3rem, 6vw, 7rem); align-items: start; }
-  .about-visual { display: flex; flex-direction: column; gap: 1.5rem; }
+  .about-visual { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
   .portrait-wrap { position: relative; width: clamp(190px, 20vw, 270px); }
   .portrait { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; position: relative; z-index: 1; }
   .portrait-placeholder { width: 100%; aspect-ratio: 3/4; background: var(--steel); border: 1px solid var(--ghost); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; position: relative; z-index: 1; }
@@ -78,12 +78,12 @@ const { about, stats } = SITE;
   .stat-num { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 400; color: var(--ice); letter-spacing: -0.02em; line-height: 1; }
   .stat-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
   .about-content h2 em { font-style: italic; color: var(--ice); font-weight: 300; }
-  .bio-para { font-size: 1rem; font-weight: 300; color: var(--silver); line-height: 1.85; margin-bottom: 1rem; }
+  .bio-para { font-size: 1.1rem; font-weight: 300; color: var(--silver); line-height: 1.85; margin-bottom: 1rem; }
   .services-block { margin-top: 2.5rem; }
   .services-heading { font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
   .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; }
   .service h4 { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; margin-bottom: 0.4rem; }
-  .service p { font-size: 0.85rem; color: var(--silver); line-height: 1.65; max-width: none; }
+  .service p { font-size: 0.92rem; color: var(--silver); line-height: 1.65; max-width: none; }
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; }
     .about-visual { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
