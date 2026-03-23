@@ -9,14 +9,16 @@ const categories = ['All', ...new Set(samples.map(s => s.category))];
 
 <BaseLayout title={"Work — " + SITE.name} description={work.subhead}>
 
-  <section class="page-hero">
-    <div class="container">
-      <p class="eyebrow fade-up">{work.eyebrow}</p>
-      <h1 class="fade-up delay-1">{work.heading}</h1>
-      <div class="rule fade-up delay-2"></div>
-      <p class="page-sub fade-up delay-2">{work.subhead}</p>
+  <div class="page-header">
+    <div class="container page-header-inner">
+      <div class="page-header-text">
+        <p class="eyebrow fade-up">{work.eyebrow}</p>
+        <h1 class="fade-up delay-1">{work.heading}</h1>
+        <div class="rule fade-up delay-2"></div>
+        <p class="page-sub fade-up delay-2">{work.subhead}</p>
+      </div>
     </div>
-  </section>
+  </div>
 
   <section class="work-section">
     <div class="container">
@@ -53,11 +55,13 @@ const categories = ['All', ...new Set(samples.map(s => s.category))];
 </BaseLayout>
 
 <style>
-  .page-hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
-  .page-hero { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(1.25rem, 2vw, 1.75rem); }
-  .page-sub { font-size: 1rem; color: var(--silver); max-width: 58ch; margin-top: -0.25rem; }
-  .work-section { background: var(--deep); padding-block: clamp(3.5rem, 7vw, 6rem); }
-  .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+  .page-header { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(1.25rem, 2vw, 1.75rem); }
+  .page-header-inner { display: flex; align-items: flex-end; gap: 2rem; }
+  .page-header-text { flex: 1; }
+  .page-header h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
+  .page-sub { font-size: 0.92rem; color: var(--silver); max-width: 58ch; margin-top: -0.25rem; }
+  .work-section { background: var(--deep); padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+  .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
   .filter-btn { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; padding: 0.5rem 1.2rem; border: 1px solid var(--ghost); background: transparent; color: var(--dim); cursor: pointer; transition: all 0.2s; }
   .filter-btn:hover { border-color: var(--dim); color: var(--silver); }
   .filter-btn.active { background: rgba(95,168,194,0.1); border-color: var(--arctic); color: var(--ice); }
