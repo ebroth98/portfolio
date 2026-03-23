@@ -13,8 +13,8 @@
   --glacier:   #1A4459;
 
   --white:     #E8EDF2;
-  --silver:    #7E90A8;
-  --dim:       #404D63;
+  --silver:    #A8B8CC;
+  --dim:       #5A6A82;
   --ghost:     #232B3A;
 
   --font-heading: 'Fraunces', Georgia, serif;
@@ -32,6 +32,7 @@ body {
   font-family: var(--font-body);
   font-weight: 300;
   line-height: 1.7;
+  font-size: 1.05rem;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
