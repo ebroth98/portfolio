@@ -7,6 +7,85 @@ const { about, stats } = SITE;
 
 <BaseLayout title={"About — " + SITE.name} description={"About " + SITE.name + ", freelance copywriter."}>
 
+  <section class="about-section">
+    <div class="container about-grid">
+
+      <div class="about-visual">
+        <div class="portrait-wrap">
+          <img src="/headshot.jpg" alt={SITE.name} class="portrait" />
+          <div class="portrait-offset"></div>
+        </div>
+        <div class="stat-stack">
+          {stats.map((s) => (
+            <div class="stat-item">
+              <span class="stat-num">{s.num}</span>
+              <span class="stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="about-content">
+        <h2>{about.headlinePart1} <em>{about.headlineEm}</em></h2>
+        <div class="rule"></div>
+        {about.bio.map((para) => (
+          <p class="bio-para">{para}</p>
+        ))}
+
+        <div class="services-block">
+          <h3 class="services-heading">{about.services_heading}</h3>
+          <div class="services-grid">
+            {about.services.map((s) => (
+              <div class="service">
+                <h4>{s.title}</h4>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <a href="/contact" class="btn btn-primary" style="display:inline-flex;margin-top:2rem;">{about.cta_label}</a>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .about-section { background: var(--deep); padding-block: clamp(2.5rem, 5vw, 4rem); }
+  .about-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(3rem, 6vw, 7rem); align-items: start; }
+  .about-visual { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+  .portrait-wrap { position: relative; width: clamp(190px, 20vw, 270px); }
+  .portrait { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; position: relative; z-index: 1; }
+  .portrait-offset { position: absolute; bottom: -8px; right: -8px; width: 100%; height: 100%; border: 1px solid var(--glacier); opacity: 0.35; z-index: 0; }
+  .stat-stack { display: flex; flex-direction: column; border: 1px solid var(--ghost); }
+  .stat-item { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--ghost); }
+  .stat-item:last-child { border-bottom: none; }
+  .stat-num { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 400; color: var(--ice); letter-spacing: -0.02em; line-height: 1; }
+  .stat-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+  .about-content h2 em { font-style: italic; color: var(--ice); font-weight: 300; }
+  .bio-para { font-size: 1.1rem; font-weight: 300; color: var(--silver); line-height: 1.85; margin-bottom: 1rem; }
+  .services-block { margin-top: 2.5rem; }
+  .services-heading { font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; }
+  .service h4 { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+  .service p { font-size: 0.92rem; color: var(--silver); line-height: 1.65; max-width: none; }
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
+    .portrait-wrap { width: min(200px, 45vw); }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config.js';
+
+const { about, stats } = SITE;
+---
+
+<BaseLayout title={"About — " + SITE.name} description={"About " + SITE.name + ", freelance copywriter."}>
+
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow fade-up">{about.eyebrow}</p>
