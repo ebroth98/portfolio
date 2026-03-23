@@ -46,8 +46,9 @@ function linkClass(href) {
 </header>
 
 <style>
-  .site-header {
+ .site-header {
     position: sticky; top: 0; z-index: 100;
+    overflow: visible;
     background: rgba(8,9,14,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--ghost);
@@ -63,18 +64,26 @@ function linkClass(href) {
     gap: 1rem;
   }
 
-  .logo { display: flex; align-items: center; gap: 0.85rem; }
+  .logo { display: flex; align-items: center; gap: 0.85rem; overflow: visible; }
   .logo-img {
     width: 120px; height: 120px;
     object-fit: contain;
     filter: brightness(1.5) contrast(1.1);
     opacity: 0.65;
     transition: filter 0.2s, opacity 0.2s;
+    position: absolute;
+    top: -20px;
+    left: clamp(1.25rem, 5vw, 3.5rem);
+    pointer-events: none;
+    z-index: 10;
+  }
   }
   .logo:hover .logo-img { filter: brightness(1.8) contrast(1.15); opacity: 1; }
+  .logo:hover .logo-name { color: var(--ice); }
+  .logo:hover .logo-sub { color: var(--frost); filter: brightness(1.3); }
   .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
-  .logo-name { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; }
-  .logo-sub  { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--frost); }
+  .logo-name { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; transition: color 0.2s; }
+  .logo-sub  { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--frost); transition: color 0.2s, filter 0.2s; }
 
   .nav-links {
     display: flex;
