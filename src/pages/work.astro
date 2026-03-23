@@ -9,77 +9,104 @@ const categories = ['All', ...new Set(samples.map(s => s.category))];
 
 <BaseLayout title={"Work — " + SITE.name} description={work.subhead}>
 
-  <div class="page-header">
-    <div class="container page-header-inner">
-      <div class="page-header-text">
+  <section class="work-page">
+    <div class="container work-inner">
+
+      <!-- Left: header -->
+      <div class="work-header">
         <p class="eyebrow fade-up">{work.eyebrow}</p>
         <h1 class="fade-up delay-1">{work.heading}</h1>
         <div class="rule fade-up delay-2"></div>
         <p class="page-sub fade-up delay-2">{work.subhead}</p>
       </div>
-    </div>
-  </div>
 
-  <section class="work-section">
-    <div class="container">
-      <div class="filter-tabs">
-        {categories.map((cat) => (
-          <button class="filter-btn" data-filter={cat}>{cat}</button>
-        ))}
-      </div>
+      <!-- Right: filters + grid -->
+      <div class="work-content fade-up delay-2">
+        <div class="filter-tabs">
+          {categories.map((cat) => (
+            <button class="filter-btn" data-filter={cat}>{cat}</button>
+          ))}
+        </div>
 
-      <div class="work-grid" id="workGrid">
-        {samples.map((sample) => (
-          <article class="work-card" data-category={sample.category}>
-            <div class="card-top">
-              <span class={sample.tagClass}>{sample.category}</span>
-              <span class="read-time">{sample.readTime}</span>
-            </div>
-            <h3 class="card-title">{sample.title}</h3>
-            <p class="card-desc">{sample.description}</p>
-            <blockquote class="card-quote">{sample.excerpt}</blockquote>
-            <div class="card-footer">
-              <div class="card-skills">
-                {sample.skills.map((sk) => (
-                  <span class="skill">{sk}</span>
-                ))}
+        <div class="work-grid" id="workGrid">
+          {samples.map((sample) => (
+            <article class="work-card" data-category={sample.category}>
+              <div class="card-top">
+                <span class={sample.tagClass}>{sample.category}</span>
+                <span class="read-time">{sample.readTime}</span>
               </div>
-              <button class="read-btn">{work.read_btn}</button>
-            </div>
-          </article>
-        ))}
+              <h3 class="card-title">{sample.title}</h3>
+              <p class="card-desc">{sample.description}</p>
+              <blockquote class="card-quote">{sample.excerpt}</blockquote>
+              <div class="card-footer">
+                <div class="card-skills">
+                  {sample.skills.map((sk) => (
+                    <span class="skill">{sk}</span>
+                  ))}
+                </div>
+                <button class="read-btn">{work.read_btn}</button>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
+
     </div>
   </section>
 
 </BaseLayout>
 
 <style>
-  .page-header { background: var(--obsidian); border-bottom: 1px solid var(--ghost); padding-block: clamp(1.25rem, 2vw, 1.75rem); }
-  .page-header-inner { display: flex; align-items: flex-end; gap: 2rem; }
-  .page-header-text { flex: 1; }
-  .page-header h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
-  .page-sub { font-size: 0.92rem; color: var(--silver); max-width: 58ch; margin-top: -0.25rem; }
-  .work-section { background: var(--deep); padding-block: clamp(1.5rem, 3vw, 2.5rem); }
-  .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+  .work-page {
+    background: var(--deep);
+    padding-block: 2rem clamp(2rem, 4vw, 3rem);
+    min-height: unset;
+  }
+
+  .work-inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  /* Left header column — sticky so it stays visible while scrolling */
+  .work-header {
+    position: sticky;
+    top: 5rem;
+  }
+  .work-header h1 { font-size: clamp(1.4rem, 2vw, 2rem); letter-spacing: -0.01em; margin-bottom: 0; }
+  .page-sub { font-size: 0.82rem; color: var(--silver); line-height: 1.7; margin-top: -0.25rem; max-width: none; }
+
+  /* Right content column */
+  .work-content { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .filter-btn { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; padding: 0.5rem 1.2rem; border: 1px solid var(--ghost); background: transparent; color: var(--dim); cursor: pointer; transition: all 0.2s; }
   .filter-btn:hover { border-color: var(--dim); color: var(--silver); }
   .filter-btn.active { background: rgba(95,168,194,0.1); border-color: var(--arctic); color: var(--ice); }
-  .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1.5rem; }
-  .work-card { background: var(--obsidian); border: 1px solid var(--ghost); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.9rem; transition: border-color 0.25s, transform 0.25s; }
+
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1.25rem; }
+
+  .work-card { background: var(--obsidian); border: 1px solid var(--ghost); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; transition: border-color 0.25s, transform 0.25s; }
   .work-card:hover { border-color: var(--dim); transform: translateY(-3px); }
   .work-card.hidden { display: none; }
   .card-top { display: flex; justify-content: space-between; align-items: center; }
   .read-time { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; color: var(--dim); }
-  .card-title { font-size: 1.15rem; letter-spacing: -0.01em; line-height: 1.2; }
-  .card-desc { font-size: 0.86rem; color: var(--silver); line-height: 1.7; max-width: none; }
-  .card-quote { border-left: 2px solid var(--glacier); padding-left: 1rem; font-style: italic; font-size: 0.88rem; color: var(--ice); opacity: 0.75; line-height: 1.65; margin-top: auto; max-width: none; transition: opacity 0.25s; }
+  .card-title { font-size: 1.05rem; letter-spacing: -0.01em; line-height: 1.2; }
+  .card-desc { font-size: 0.84rem; color: var(--silver); line-height: 1.65; max-width: none; }
+  .card-quote { border-left: 2px solid var(--glacier); padding-left: 1rem; font-style: italic; font-size: 0.84rem; color: var(--ice); opacity: 0.75; line-height: 1.6; margin-top: auto; max-width: none; transition: opacity 0.25s; }
   .work-card:hover .card-quote { opacity: 1; }
   .card-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.75rem; }
   .card-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .skill { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; padding: 0.2rem 0.6rem; border: 1px solid var(--ghost); color: var(--dim); }
+  .skill { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.06em; padding: 0.2rem 0.55rem; border: 1px solid var(--ghost); color: var(--dim); }
   .read-btn { background: none; border: none; font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; color: var(--frost); cursor: pointer; padding: 0; transition: color 0.2s; white-space: nowrap; }
   .read-btn:hover { color: var(--ice); }
+
+  @media (max-width: 860px) {
+    .work-inner { grid-template-columns: 1fr; }
+    .work-header { position: static; }
+  }
 </style>
 
 <script>
